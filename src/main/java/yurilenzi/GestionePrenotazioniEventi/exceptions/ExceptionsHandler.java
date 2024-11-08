@@ -16,4 +16,9 @@ public class ExceptionsHandler {
         return new ErrorResponseDTO(ex.getMessage());
     }
 
+    @ExceptionHandler(SameUtenteException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponseDTO handleBadRequest(SameUtenteException  ex){
+        return new ErrorResponseDTO(ex.getMessage());
+    }
 }
