@@ -42,6 +42,18 @@ public class ExceptionsHandler {
         return new ErrorResponseDTO(ex.getMessage());
     }
 
+    @ExceptionHandler(FinishPlaceException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponseDTO handleBadRequest(FinishPlaceException  ex){
+        return new ErrorResponseDTO(ex.getMessage());
+    }
+
+    @ExceptionHandler(UtenteGiaPrenotatoException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponseDTO handleBadRequest(UtenteGiaPrenotatoException  ex){
+        return new ErrorResponseDTO(ex.getMessage());
+    }
+
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponseDTO handleBadRequest(NotFoundException  ex){
