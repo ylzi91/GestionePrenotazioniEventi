@@ -57,4 +57,14 @@ public class EventoService {
     public List<Evento> vediMieiEventi(Utente currentUtente){
         return eventoRepository.findByUtente(currentUtente);
     }
+
+    public void eliminaEvento(Utente utenteCorrente, Long idEvento){
+        Evento found = findById(idEvento);
+        if(found.getUtente().getUsername().equals(utenteCorrente.getUsername())){
+            eventoRepository.delete(found);
+        }
+        else {
+            throw new OrganaizerException(utenteCorrente.getUsername(), found.getUtente().getUsername());
+        }
+    }
 }

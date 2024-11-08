@@ -65,7 +65,10 @@ public class PrenotazioneService {
         else{
             throw new OrganaizerException(utenteCorrente.getUsername(), found.getUtente().getUsername());
         }
+    }
 
-
+    public void deletePrenotazioneMaster(Long idPrenotazione){
+        Prenotazione found = findById(idPrenotazione);
+        prenotazioneRepository.delete(found);
     }
 }

@@ -36,9 +36,14 @@ public class PrenotazioneController {
         return prenotazioneService.vediPrenotazioniUtente(currentUtente);
     }
 
-    @DeleteMapping("/idPrenotazione")
+    @DeleteMapping("/mie/{idPrenotazione}")
+    public void vediPrenotazioneUtente(@AuthenticationPrincipal Utente currentUtente, Long idPrenotazione){
+        prenotazioneService.deletePrenotazione(currentUtente, idPrenotazione);
+    }
+
+    @DeleteMapping("/{idPrenotazione}")
     @PreAuthorize("hasAuthority('ORGANIZZATORE_EVENTI')")
-    public void EliminaPrenotazione(@AuthenticationPrincipal Utente utenteCorrente, @PathVariable Long idPrenotazione){
-        prenotazioneService.deletePrenotazione(utenteCorrente, idPrenotazione);
+    public void EliminaPrenotazione(@PathVariable Long idPrenotazione){
+        prenotazioneService.deletePrenotazioneMaster(idPrenotazione);
     }
 }

@@ -1,6 +1,5 @@
 package yurilenzi.GestionePrenotazioniEventi.controllers;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -52,6 +51,12 @@ public class EventoController {
     @PreAuthorize("hasAuthority('ORGANIZZATORE_EVENTI')")
     public List<Evento> vediMieiEventi(@AuthenticationPrincipal Utente currentOrganizzatore){
         return eventoService.vediMieiEventi(currentOrganizzatore);
+    }
+
+    @DeleteMapping("/{idEvento}")
+    @PreAuthorize("hasAuthority('ORGANIZZATORE_EVENTI')")
+    public void eliminaEvento(@PathVariable Long idEvento, @AuthenticationPrincipal Utente currentOrganizzatore){
+        eventoService.eliminaEvento(currentOrganizzatore, idEvento);
     }
 
 
