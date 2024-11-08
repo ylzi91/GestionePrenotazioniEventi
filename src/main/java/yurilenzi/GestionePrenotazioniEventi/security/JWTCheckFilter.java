@@ -13,6 +13,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 import yurilenzi.GestionePrenotazioniEventi.entities.Utente;
 import yurilenzi.GestionePrenotazioniEventi.exceptions.UnauthorizedException;
+import yurilenzi.GestionePrenotazioniEventi.services.UtenteService;
 import yurilenzi.GestionePrenotazioniEventi.tools.JWT;
 
 import java.io.IOException;
@@ -21,6 +22,8 @@ import java.io.IOException;
 public class JWTCheckFilter extends OncePerRequestFilter {
     @Autowired
     JWT jwt;
+    @Autowired
+    UtenteService utenteService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -33,9 +36,9 @@ public class JWTCheckFilter extends OncePerRequestFilter {
 
         String username = jwt.getUsernameFromToken(accesToken);
 
-//        Utente currentUtente = dipendenteService.findByUsername(username);
-//        Authentication authentication = new UsernamePasswordAuthenticationToken(currentDipendente, null, currentDipendente.getAuthorities());
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
+        Utente currentUtente = utenteService.findByUsername(username);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(currentUtente, null, currentUtente.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
         filterChain.doFilter(request, response);
     }

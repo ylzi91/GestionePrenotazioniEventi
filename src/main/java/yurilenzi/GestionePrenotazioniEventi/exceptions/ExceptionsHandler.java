@@ -21,4 +21,16 @@ public class ExceptionsHandler {
     public ErrorResponseDTO handleBadRequest(SameUtenteException  ex){
         return new ErrorResponseDTO(ex.getMessage());
     }
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponseDTO handleBadRequest(BadRequestException  ex){
+        return new ErrorResponseDTO(ex.getMessage());
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponseDTO handleBadRequest(NotFoundException  ex){
+        return new ErrorResponseDTO(ex.getMessage());
+    }
+
 }
