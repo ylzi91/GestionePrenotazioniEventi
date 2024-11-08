@@ -6,4 +6,9 @@ public class NotFoundException extends RuntimeException {
                 username + " non trovato"
         );
     }
+    public NotFoundException(Long id) {
+        super(
+                id + " non trovato"
+        );
+    }
 }

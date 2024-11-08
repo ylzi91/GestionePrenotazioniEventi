@@ -9,6 +9,8 @@ import yurilenzi.GestionePrenotazioniEventi.exceptions.SameUtenteException;
 import yurilenzi.GestionePrenotazioniEventi.payloads.NewUtenteDTO;
 import yurilenzi.GestionePrenotazioniEventi.repositories.UtenteRepository;
 
+import java.util.List;
+
 @Service
 public class UtenteService {
     @Autowired
@@ -29,4 +31,10 @@ public class UtenteService {
         return utenteRepository.save(new Utente(body.username(), body.nome(), body.cognome(), bcrypt.encode(body.password())));
 
     }
+
+    public List<Utente> vediTutti(){
+        return utenteRepository.findAll();
+    }
+
+
 }
